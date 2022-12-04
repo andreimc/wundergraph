@@ -1,5 +1,6 @@
 //language=handlebars
 export const template = `
+/* eslint-disable */
 import type {
     BaseOperationConfiguration,
     ConfigureQuery,

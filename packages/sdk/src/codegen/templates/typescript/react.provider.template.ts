@@ -1,5 +1,6 @@
 //language=handlebars
 export const template = `
+/* eslint-disable */
 import { Client } from "./wundergraph.client";
 import type { UserListener } from "@wundergraph/sdk";
 import type { User } from "./wundergraph.server";

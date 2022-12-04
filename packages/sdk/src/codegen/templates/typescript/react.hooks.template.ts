@@ -1,5 +1,6 @@
 //language=handlebars
 export const template = `
+/* eslint-disable */
 import {useCallback, useContext, useEffect, useMemo, useState} from "react";
 import {WunderGraphContext} from "./provider";
 import { RequestOptions, MutateRequestOptions, SubscriptionRequestOptions, Response} from "@wundergraph/sdk"

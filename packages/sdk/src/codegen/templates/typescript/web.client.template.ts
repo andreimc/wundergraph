@@ -1,5 +1,6 @@
 //language=handlebars
 export const template = `
+/* eslint-disable */
 import type { {{ modelImports }} } from "./models";
 import type { RequestOptions, UserListener, Response } from "@wundergraph/sdk";
 import type { User, Role } from "./wundergraph.server";

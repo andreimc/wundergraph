@@ -1,5 +1,6 @@
 //language=handlebars
 export const handlebarTemplate = `
+/* eslint-disable */
 import {
 	Client,
 	ClientConfig,

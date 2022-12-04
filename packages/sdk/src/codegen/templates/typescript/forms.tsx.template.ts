@@ -1,5 +1,6 @@
 //language=handlebars
 export const template = `
+/* eslint-disable */
 import React, {useEffect, useState} from "react";
 import type { Response } from "@wundergraph/sdk";
 {{#if hasModelImports}}import { {{modelImports}} } from "./models";{{/if}}

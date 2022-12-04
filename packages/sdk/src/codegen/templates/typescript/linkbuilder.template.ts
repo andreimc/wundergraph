@@ -1,5 +1,6 @@
 //language=handlebars
 export const template = `
+/* eslint-disable */
 export interface LinkDefinition {
     targetType: string;
     targetFieldName: string;

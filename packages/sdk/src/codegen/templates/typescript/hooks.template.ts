@@ -1,5 +1,6 @@
 //language=handlebars
 export const template = `
+/* eslint-disable */
 import { {{ modelImports }} } from "./models"
 import type { BaseRequestContext, WunderGraphRequest, WunderGraphResponse, AuthenticationResponse, AuthenticationHookRequest, HooksConfiguration, WsTransportOnConnectionInitResponse } from "@wundergraph/sdk";
 import type { InternalClient } from "./wundergraph.internal.client"

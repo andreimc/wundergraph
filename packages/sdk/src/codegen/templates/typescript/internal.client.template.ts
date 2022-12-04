@@ -1,5 +1,6 @@
 //language=handlebars
 export const template = `
+/* eslint-disable */
 import type { OperationArgsWithInput, InternalClient as BaseClient } from "@wundergraph/sdk";
 import { {{ modelImports }} } from "./models"
 
