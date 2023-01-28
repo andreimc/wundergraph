@@ -235,10 +235,18 @@ export class GolangClient implements Template {
 		]);
 	}
 }
+//Convert string to pascal case
+const toPascalCase = (string: string) => {
+	return `${string}`
+		.toLowerCase()
+		.replace(new RegExp(/[-_]+/, 'g'), ' ')
+		.replace(new RegExp(/[^\w\s]/, 'g'), '')
+		.replace(new RegExp(/\s+(.)(\w*)/, 'g'), ($1, $2, $3) => `${$2.toUpperCase() + $3}`)
+		.replace(new RegExp(/\w/), (s) => s.toUpperCase());
+};
 
 const JSONSchemaToGolangStruct = (schema: JSONSchema, structName: string, withErrors: boolean): string => {
 	let out = '';
-	const capitalize = (name: string) => _.capitalize(name.substring(0, 1)) + name.substring(1);
 	const addJsonTag = (fieldName: string, isArray: boolean) => {
 		if (isArray) {
 			return;
@@ -248,7 +256,7 @@ const JSONSchemaToGolangStruct = (schema: JSONSchema, structName: string, withEr
 	visitJSONSchema(schema, {
 		root: {
 			enter: () => {
-				out += `type ${capitalize(structName)} struct {\n`;
+				out += `type ${toPascalCase(structName)} struct {\n`;
 			},
 			leave: () => {
 				if (withErrors) {
@@ -258,12 +266,12 @@ const JSONSchemaToGolangStruct = (schema: JSONSchema, structName: string, withEr
 			},
 		},
 		number: (name, isRequired, isArray) => {
-			out += `\t${capitalize(name)} ${isArray ? '[]' : ''}${isRequired ? '' : '*'}float64`;
+			out += `\t${toPascalCase(name)} ${isArray ? '[]' : ''}${isRequired ? '' : '*'}float64`;
 			addJsonTag(name, isArray);
 		},
 		array: {
 			enter: (name, isRequired, isArray) => {
-				out += `\t${capitalize(name)}`;
+				out += `\t${toPascalCase(name)}`;
 			},
 			leave: (name, isRequired, isArray) => {
 				if (name) {
@@ -272,12 +280,12 @@ const JSONSchemaToGolangStruct = (schema: JSONSchema, structName: string, withEr
 			},
 		},
 		string: (name, isRequired, isArray, enumValues) => {
-			out += `\t${capitalize(name)} ${isArray ? '[]' : ''}${isRequired ? '' : '*'}string `;
+			out += `\t${toPascalCase(name)} ${isArray ? '[]' : ''}${isRequired ? '' : '*'}string `;
 			addJsonTag(name, isArray);
 		},
 		object: {
 			enter: (name, isRequired, isArray) => {
-				out += `\t${capitalize(name)} ${isArray ? '[]' : ''}${isRequired ? '' : '*'}struct {\n`;
+				out += `\t${toPascalCase(name)} ${isArray ? '[]' : ''}${isRequired ? '' : '*'}struct {\n`;
 			},
 			leave: (name, isRequired, isArray) => {
 				if (isArray) {
@@ -289,15 +297,15 @@ const JSONSchemaToGolangStruct = (schema: JSONSchema, structName: string, withEr
 			},
 		},
 		boolean: (name, isRequired, isArray) => {
-			out += `\t${capitalize(name)} ${isArray ? '[]' : ''}${isRequired ? '' : '*'}bool`;
+			out += `\t${toPascalCase(name)} ${isArray ? '[]' : ''}${isRequired ? '' : '*'}bool`;
 			addJsonTag(name, isArray);
 		},
 		any: (name, isRequired, isArray) => {
-			out += `\t${capitalize(name)} ${isArray ? '[]' : ''}${isRequired ? '' : '*'}interface{} `;
+			out += `\t${toPascalCase(name)} ${isArray ? '[]' : ''}${isRequired ? '' : '*'}interface{} `;
 			addJsonTag(name, isArray);
 		},
 		customType: (name, typeName, isRequired, isArray) => {
-			out += `\t${capitalize(name)} ${isArray ? '[]' : ''} ${isRequired ? '' : '*'}${capitalize(typeName)}`;
+			out += `\t${toPascalCase(name)} ${isArray ? '[]' : ''} ${isRequired ? '' : '*'}${toPascalCase(typeName)}`;
 			addJsonTag(name, isArray);
 		},
 	});
